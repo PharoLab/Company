@@ -20,6 +20,30 @@ Tasks class >> addToCollection: aCollection [
 ]
 
 { #category : #'as yet unclassified' }
+Tasks class >> createManagersCollection: aCollection [
+	|resultCollection|
+	resultCollection := OrderedCollection new.
+	
+	resultCollection := aCollection select: [ :employee |
+		(employee isKindOf: Manager)
+	].
+	
+	^resultCollection.
+]
+
+{ #category : #'as yet unclassified' }
+Tasks class >> createProgrammersCollection: aCollection [
+	|resultCollection|
+	resultCollection := OrderedCollection new.
+	
+	resultCollection := aCollection select: [ :employee |
+		(employee isKindOf: Programmer)
+	].
+	
+	^resultCollection.
+]
+
+{ #category : #'as yet unclassified' }
 Tasks class >> findHighestWage: aCollection [
 	"find the highest paid employee"
 	|employeeWithTheLargestWage|
