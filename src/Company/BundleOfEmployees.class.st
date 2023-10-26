@@ -36,14 +36,14 @@ BundleOfEmployees >> add: anEmployee [
 ]
 
 { #category : #adding }
-BundleOfEmployees >> addAll: aShapeCollection [
-	^ memory addAll: (aShapeCollection select: [ :x | x isKindOf: Employee ])
+BundleOfEmployees >> addAll: anEmployeeCollection [
+	^ memory addAll: (anEmployeeCollection select: [ :x | x isKindOf: Employee ])
 ]
 
 { #category : #adding }
-BundleOfEmployees >> addFirst: aShape [
-	self checkAnObject: aShape.
-	^ memory addFirst: aShape
+BundleOfEmployees >> addFirst: anEmployee [
+	self checkAnObject: anEmployee.
+	^ memory addFirst: anEmployee
 ]
 
 { #category : #accessing }
@@ -52,9 +52,9 @@ BundleOfEmployees >> at: anIndex [
 ]
 
 { #category : #accessing }
-BundleOfEmployees >> at: anIndex put: aShape [
-	self checkAnObject: aShape.
-	^ memory at: anIndex put: aShape
+BundleOfEmployees >> at: anIndex put: anEmployee [
+	self checkAnObject: anEmployee.
+	^ memory at: anIndex put: anEmployee
 ]
 
 { #category : #'as yet unclassified' }
