@@ -43,6 +43,15 @@ Manager >> = aManager [
 	(self subordinatesCount = aManager subordinatesCount)).
 ]
 
+{ #category : #initialization }
+Manager >> initialize [ 
+	lastName := 'Johnson'.
+	experience := 10.
+	hourlyRate := 10.
+	minHoursWorked := 40.
+	subordinatesCount := 3.
+]
+
 { #category : #printing }
 Manager >> printOn: aStream [
 

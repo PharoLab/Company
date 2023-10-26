@@ -60,6 +60,15 @@ Programmer >> actuallyHours: aNumber [
 		ifFalse: [ actuallyHours := aNumber. ].
 ]
 
+{ #category : #initialization }
+Programmer >> initialize [ 
+	lastName := 'Fred'.
+	experience := 1.
+	hourlyRate := 10.
+	minHoursWorked := 35.
+	actuallyHours  := 35.
+]
+
 { #category : #'as yet unclassified' }
 Programmer >> levelUp [
 	experience := self experience + 1. 

@@ -99,6 +99,11 @@ Employee >> hourlyRate: aNumber [
 		ifFalse: [ hourlyRate := aNumber. ].
 ]
 
+{ #category : #initialization }
+Employee >> initialize [ 
+	self subclassResponsibility.
+]
+
 { #category : #accessing }
 Employee >> lastName [
 	^lastName.
