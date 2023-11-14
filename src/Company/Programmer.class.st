@@ -90,6 +90,12 @@ Programmer >> printOn: aStream [
 	aStream nextPut: $).
 ]
 
+{ #category : #accessing }
+Programmer >> subordinatesCount [
+
+	^ 'nil'
+]
+
 { #category : #'as yet unclassified' }
 Programmer >> weekWage [
 actuallyHours < minHoursWorked 

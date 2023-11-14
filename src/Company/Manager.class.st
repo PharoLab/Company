@@ -43,6 +43,11 @@ Manager >> = aManager [
 	(self subordinatesCount = aManager subordinatesCount)).
 ]
 
+{ #category : #accessing }
+Manager >> actuallyHours [ 
+	^ 'nil'
+]
+
 { #category : #initialization }
 Manager >> initialize [ 
 	lastName := 'Johnson'.

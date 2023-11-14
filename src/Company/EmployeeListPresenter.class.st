@@ -61,9 +61,11 @@ EmployeeListPresenter >> initializePresenters [
 		 addColumn: (SpStringTableColumn title: 'Lastname' evaluated: #lastName) beSortable;
 		 addColumn: (SpStringTableColumn title: 'Experience' evaluated: #experience) beSortable;
 		 addColumn: (SpStringTableColumn title: 'Hourly Rate' evaluated: #hourlyRate) beSortable;
-		 addColumn: (SpStringTableColumn title: 'Minimal Worked Hours' evaluated: #minHoursWorked) beSortable;
-		 "addColumn: (SpStringTableColumn title: 'Subordinates Count' evaluated: #subordinatesCount) beSortable;
-		 addColumn: (SpStringTableColumn title: 'Actually Hours' evaluated: #actuallyHours) beSortable;"
+		 addColumn: (SpStringTableColumn title: 'Minimal Worked Hours' evaluated: #minHoursWorked) 		        beSortable;
+		 addColumn: (SpStringTableColumn title: 'Subordinates Count' 
+		 evaluated: #subordinatesCount );
+		 addColumn: (SpStringTableColumn title: 'Actually Hours' 
+		 evaluated: #actuallyHours);
 		 yourself.
 	detail := self instantiate: EmployeePresenter.
 	detail editable: false.
@@ -74,7 +76,7 @@ EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: windowTitle;
-		initialExtent: 700 @ 700;
+		initialExtent: 900 @ 700;
 		toolbar: (self newToolbar
 				 add: (self newToolbarButton
 						  label: 'Add employee';
