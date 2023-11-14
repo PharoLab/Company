@@ -2,6 +2,7 @@ Class {
 	#name : #EmployeeListPresenter,
 	#superclass : #SpPresenter,
 	#instVars : [
+		'windowTitle',
 		'employeeList',
 		'detail'
 	],
@@ -48,9 +49,14 @@ EmployeeListPresenter >> employeeList [
 	^ employeeList 
 ]
 
+{ #category : #accessing }
+EmployeeListPresenter >> employeeList: anObject [
+
+	employeeList items: anObject.
+]
+
 { #category : #initialization }
 EmployeeListPresenter >> initializePresenters [
-
 	employeeList := self newTable
 		 addColumn: (SpStringTableColumn title: 'Lastname' evaluated: #lastName) beSortable;
 		 addColumn: (SpStringTableColumn title: 'Experience' evaluated: #experience) beSortable;
@@ -67,7 +73,7 @@ EmployeeListPresenter >> initializePresenters [
 EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
-		title: 'Company';
+		title: windowTitle;
 		initialExtent: 700 @ 700;
 		toolbar: (self newToolbar
 				 add: (self newToolbarButton
@@ -95,9 +101,21 @@ yourself
 
 { #category : #initialization }
 EmployeeListPresenter >> updatePresenter [
-	|list|
+	"|list|
 	list := OrderedCollection new.
    list add: Programmer new.
-	list add: Manager new.
-	employeeList items: list.
+	list add: Manager new."
+	employeeList items: OrderedCollection new.
+]
+
+{ #category : #accessing }
+EmployeeListPresenter >> windowTitle [
+
+	^ windowTitle
+]
+
+{ #category : #accessing }
+EmployeeListPresenter >> windowTitle: anObject [
+
+	windowTitle := anObject
 ]
