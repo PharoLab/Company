@@ -11,15 +11,40 @@ Class {
 
 { #category : #adding }
 EmployeeListPresenter >> addEmployee [ 
-	"empty for now"
 
-	| presenter |
+	"| presenter |
 	presenter := SpNotebookPresenter new 
-		addPageTitle: 'Add Programmer' provider: [ EmployeePresenter new];
-		addPageTitle: 'Add Manager' provider: [ EmployeePresenter new ];
+		addPageTitle: 'Add Programmer' provider: [ ProgrammerPresenter new];
+		addPageTitle: 'Add Manager' provider: [ ManagerPresenter new ];
 		open.
 	
+	self updatePresenter"
+
+	| presenter windowPresenter |
+	"presenter := EmployeePresenter newApplication: self application."
+	presenter := SpNotebookPresenter new 
+		addPageTitle: 'Add Programmer' provider: [ ProgrammerPresenter new];
+		addPageTitle: 'Add Manager' provider: [ ManagerPresenter new ];
+		yourself.
+	windowPresenter := presenter openModal.
+	windowPresenter isOk ifFalse: [ ^ self ].
+	[employeeList add: (Programmer new
+			 lastName: ((presenter pageAt: 1) owner) lastName;
+			 experience: presenter experience ;
+			 minHoursWorked: presenter minHoursWorked;
+			 hourlyRate: presenter hourlyRate;
+			 actuallyHours: presenter actuallyHours
+			)]
+		on: Exception
+		do: [employeeList add: (Manager new
+			 lastName: ((presenter pageAt: 2) labelPresenterFor: ManagerPresenter );
+			 experience: presenter experience;
+			 hourlyRate: presenter hourlyRate;
+			 subordinatesCount: presenter subordinatesCount
+			)].
+		
 	self updatePresenter
+	
 
 ]
 

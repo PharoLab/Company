@@ -1,6 +1,6 @@
 Class {
 	#name : #EmployeePresenter,
-	#superclass : #SpPresenter,
+	#superclass : #SpNotebookPresenter,
 	#instVars : [
 		'nameLabel',
 		'lastNameText',

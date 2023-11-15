@@ -17,7 +17,6 @@ ManagerPresenter >> defaultLayout [
 			  add: 'Last Name';  add: lastNameText; nextRow;
 			  add: 'Experience'; add: experienceNumber; nextRow;
 			  add: 'Hourly Rate'; add: hourlyRateNumber; nextRow;
-			  add: 'Min Hours Worked'; add: minHoursWorkedNumber; nextRow;
 			  add: 'Subordinates Count'; add: subordinatesCountNumber
 			]
 ]
@@ -28,7 +27,6 @@ ManagerPresenter >> editable: aBoolean [
 	lastNameText editable: aBoolean.
 	experienceNumber editable: aBoolean.
 	hourlyRateNumber editable: aBoolean.
-	minHoursWorkedNumber editable: aBoolean.
 	subordinatesCountNumber editable: aBoolean.
 ]
 
@@ -45,9 +43,6 @@ ManagerPresenter >> initializePresenters [
 							 rangeMinimum: 0 maximum: 80;yourself.
 	hourlyRateNumber  := self newNumberInput
 		              rangeMinimum: 1 maximum: 100000;
-		              yourself.
-	minHoursWorkedNumber := self newNumberInput
-		              rangeMinimum: 1 maximum: 168;
 		              yourself.
 	subordinatesCountNumber := self newNumberInput
 		              rangeMinimum: 1 maximum: 100000;
@@ -67,6 +62,5 @@ ManagerPresenter >> setModel: anEmployee [
 	lastNameText text: anEmployee lastName.
 	experienceNumber text: anEmployee experience.
 	hourlyRateNumber number: anEmployee hourlyRate.
-	minHoursWorkedNumber number: anEmployee minHoursWorked.
 	subordinatesCountNumber number: anEmployee subordinatesCount.
 ]
