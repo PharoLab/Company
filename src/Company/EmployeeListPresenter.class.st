@@ -11,7 +11,15 @@ Class {
 
 { #category : #adding }
 EmployeeListPresenter >> addEmployee [ 
-    "empty for now"
+	"empty for now"
+
+	| presenter |
+	presenter := SpNotebookPresenter new 
+		addPageTitle: 'Add Programmer' provider: [ EmployeePresenter new];
+		addPageTitle: 'Add Manager' provider: [ EmployeePresenter new ];
+		open.
+	
+	self updatePresenter
 
 ]
 
