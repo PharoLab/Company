@@ -5,7 +5,8 @@ Class {
 		'windowTitle',
 		'employeeList',
 		'detail',
-		'company'
+		'company',
+		'companyFilter'
 	],
 	#category : #Company
 }
@@ -43,6 +44,29 @@ EmployeeListPresenter >> addProgrammer [
 		).
 		
 	self updatePresenter
+	
+
+]
+
+{ #category : #'as yet unclassified' }
+EmployeeListPresenter >> checkNorm [
+
+	| presenter windowPresenter|
+	company followNorm ifTrue:
+	[ 
+		presenter := SpTextPresenter newApplication: self application.
+		presenter text: 'Sure, all programmers complie the norms'.
+	]
+	ifFalse: [ 
+		presenter := SpTextPresenter newApplication: self application.
+		presenter text: 'No, not everyone complies the norms'.
+		companyFilter memory: company findWhoDoNotFollowNorm.
+		 ].
+	
+		windowPresenter := presenter openModal.
+		windowPresenter isOk ifFalse: [ ^ self ].
+		
+		self updateFilterPresenter.
 	
 
 ]
@@ -107,6 +131,7 @@ EmployeeListPresenter >> employeeList: anObject [
 { #category : #initialization }
 EmployeeListPresenter >> initializePresenters [
 company := Company new.
+companyFilter := company veryDeepCopy.
 	employeeList := self newTable
 		 addColumn: (SpStringTableColumn title: 'Lastname' evaluated: #lastName) beSortable;
 		 addColumn: (SpStringTableColumn title: 'Experience' evaluated: #experience) beSortable;
@@ -143,6 +168,11 @@ EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 						  icon: (self iconNamed: #changeRemove);
 						  action: [ self dismissEmployee ];
 						  yourself);
+				add: (self newToolbarButton
+						  label: 'Check whether programmers follow norm';
+						  icon: (self iconNamed: #glamorousHelp);
+						  action: [ self checkNorm ];
+						  yourself);
 				 yourself)
 ]
 
@@ -161,12 +191,13 @@ add: employeeList;
 yourself
 ]
 
+{ #category : #'as yet unclassified' }
+EmployeeListPresenter >> updateFilterPresenter [
+	employeeList items: companyFilter memory.
+]
+
 { #category : #initialization }
 EmployeeListPresenter >> updatePresenter [
-	"|list|
-	list := OrderedCollection new.
-   list add: Programmer new.
-	list add: Manager new."
 	employeeList items: company memory.
 ]
 

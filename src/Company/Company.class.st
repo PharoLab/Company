@@ -105,6 +105,15 @@ Company >> do: aBlock [
 ]
 
 { #category : #'as yet unclassified' }
+Company >> findWhoDoNotFollowNorm [
+	|programmersList|
+	
+	programmersList := memory select: [ :employee | employee isKindOf: Programmer].
+	^programmersList select: [ :programmer | 
+		programmer actuallyHours < programmer minHoursWorked ].
+]
+
+{ #category : #'as yet unclassified' }
 Company >> followNorm [
 	|programmersList|
 	
