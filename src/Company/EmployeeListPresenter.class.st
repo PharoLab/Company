@@ -173,6 +173,11 @@ EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 						  icon: (self iconNamed: #glamorousHelp);
 						  action: [ self checkNorm ];
 						  yourself);
+				add: (self newToolbarButton
+						  label: 'Reset filters';
+						  icon: (self iconNamed: #glamorousRestart);
+						  action: [ self updatePresenter];
+						  yourself);
 				 yourself)
 ]
 
