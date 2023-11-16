@@ -1,6 +1,6 @@
 Class {
 	#name : #EmployeePresenter,
-	#superclass : #SpNotebookPresenter,
+	#superclass : #SpPresenter,
 	#instVars : [
 		'nameLabel',
 		'lastNameText',
@@ -38,13 +38,23 @@ EmployeePresenter >> editable: aBoolean [
 	minHoursWorkedNumber editable: aBoolean.
 ]
 
+{ #category : #accessing }
+EmployeePresenter >> experience [
+	^ experienceNumber number
+]
+
+{ #category : #accessing }
+EmployeePresenter >> hourlyRate [
+	^ hourlyRateNumber number
+]
+
 { #category : #initialization }
 EmployeePresenter >> initializeDialogWindow: aDialogPresenter [
 
 	aDialogPresenter centered.
 	aDialogPresenter
 		addButton: 'Cancel' do: [ :presenter | presenter close ];
-		addButton: 'Save Employee' do: [ :presenter | presenter	beOk;	close ]
+		addButton: 'Save' do: [ :presenter | presenter beOk;	close ]
 ]
 
 { #category : #initialization }
@@ -71,7 +81,7 @@ EmployeePresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'Employee';
-		initialExtent: 400 @ 200
+		initialExtent: 400 @ 300
 ]
 
 { #category : #transmission }
@@ -79,10 +89,20 @@ EmployeePresenter >> inputModelPort [
 ^ SpModelPort newPresenter: self
 ]
 
+{ #category : #accessing }
+EmployeePresenter >> lastName [
+	^ lastNameText text
+]
+
+{ #category : #accessing }
+EmployeePresenter >> minHoursWorked [
+	^ minHoursWorkedNumber number
+]
+
 { #category : #'accessing - model' }
 EmployeePresenter >> setModel: anEmployee [
 	lastNameText text: anEmployee lastName.
-	experienceNumber text: anEmployee experience.
+	experienceNumber number: anEmployee experience.
 	hourlyRateNumber number: anEmployee hourlyRate.
 	minHoursWorkedNumber number: anEmployee minHoursWorked.
 

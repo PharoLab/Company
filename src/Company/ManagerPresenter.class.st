@@ -54,7 +54,7 @@ ManagerPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'Manager';
-		initialExtent: 400 @ 200
+		initialExtent: 400 @ 300
 ]
 
 { #category : #'accessing - model' }
@@ -63,4 +63,9 @@ ManagerPresenter >> setModel: anEmployee [
 	experienceNumber text: anEmployee experience.
 	hourlyRateNumber number: anEmployee hourlyRate.
 	subordinatesCountNumber number: anEmployee subordinatesCount.
+]
+
+{ #category : #accessing }
+ManagerPresenter >> subordinatesCount [
+	^ subordinatesCountNumber number
 ]

@@ -7,6 +7,11 @@ Class {
 	#category : #Company
 }
 
+{ #category : #accessing }
+ProgrammerPresenter >> actuallyHours [
+	^ actuallyHoursNumber number
+]
+
 { #category : #layout }
 ProgrammerPresenter >> defaultLayout [
 
@@ -59,7 +64,7 @@ ProgrammerPresenter >> initializeWindow: aWindowPresenter [
 
 	aWindowPresenter
 		title: 'Programmer';
-		initialExtent: 400 @ 200
+		initialExtent: 400 @ 300
 ]
 
 { #category : #'accessing - model' }
