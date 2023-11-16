@@ -5,8 +5,7 @@ Class {
 		'windowTitle',
 		'employeeList',
 		'detail',
-		'company',
-		'companyFilter'
+		'company'
 	],
 	#category : #Company
 }
@@ -51,7 +50,8 @@ EmployeeListPresenter >> addProgrammer [
 { #category : #'as yet unclassified' }
 EmployeeListPresenter >> checkNorm [
 
-	| presenter windowPresenter|
+	| presenter windowPresenter aCompanyFilter|
+	aCompanyFilter := company veryDeepCopy.
 	company followNorm ifTrue:
 	[ 
 		presenter := SpTextPresenter newApplication: self application.
@@ -60,13 +60,13 @@ EmployeeListPresenter >> checkNorm [
 	ifFalse: [ 
 		presenter := SpTextPresenter newApplication: self application.
 		presenter text: 'No, not everyone complies the norms'.
-		companyFilter memory: company findWhoDoNotFollowNorm.
+		aCompanyFilter memory: company findWhoDoNotFollowNorm.
 		 ].
 	
 		windowPresenter := presenter openModal.
 		windowPresenter isOk ifFalse: [ ^ self ].
 		
-		self updateFilterPresenter.
+		self updateFilterPresenter: aCompanyFilter.
 	
 
 ]
@@ -131,7 +131,6 @@ EmployeeListPresenter >> employeeList: anObject [
 { #category : #initialization }
 EmployeeListPresenter >> initializePresenters [
 company := Company new.
-companyFilter := company veryDeepCopy.
 	employeeList := self newTable
 		 addColumn: (SpStringTableColumn title: 'Lastname' evaluated: #lastName) beSortable;
 		 addColumn: (SpStringTableColumn title: 'Experience' evaluated: #experience) beSortable;
@@ -174,6 +173,11 @@ EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 						  action: [ self checkNorm ];
 						  yourself);
 				add: (self newToolbarButton
+						  label: 'Find the highest paid employees';
+						  icon: (self iconNamed: #glamorousSearch);
+						  action: [ self showHightestPaidEmployee ];
+						  yourself);
+				add: (self newToolbarButton
 						  label: 'Reset filters';
 						  icon: (self iconNamed: #glamorousRestart);
 						  action: [ self updatePresenter];
@@ -197,8 +201,18 @@ yourself
 ]
 
 { #category : #'as yet unclassified' }
-EmployeeListPresenter >> updateFilterPresenter [
-	employeeList items: companyFilter memory.
+EmployeeListPresenter >> showHightestPaidEmployee [
+|companyFilter|
+	companyFilter := company veryDeepCopy.
+	companyFilter memory: company findHighestPaidEmployee.
+		
+	self updateFilterPresenter: companyFilter.
+	
+]
+
+{ #category : #'as yet unclassified' }
+EmployeeListPresenter >> updateFilterPresenter: aCompanyFilter [
+	employeeList items: aCompanyFilter memory.
 ]
 
 { #category : #initialization }

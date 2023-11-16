@@ -90,7 +90,8 @@ Company >> checkSubordinatesCount [
 	|programmersCount managerList|
 	programmersCount := (memory select: [ :employee | employee isKindOf: Programmer ]) size.
 	managerList := memory select: [ :employee | employee isKindOf: Manager ].
-	^managerList allSatisfy: [ :manager | manager subordinatesCount = programmersCount ].
+	"^managerList allSatisfy: [ :manager | manager subordinatesCount = programmersCount ]."
+	^((managerList inject: 0 into: [ :sum :employee | sum + employee subordinatesCount ]) = programmersCount).
 ]
 
 { #category : #'as yet unclassified' }
@@ -102,6 +103,20 @@ Company >> dismiss: aLastName [
 { #category : #enumerating }
 Company >> do: aBlock [
 	memory do: aBlock
+]
+
+{ #category : #'as yet unclassified' }
+Company >> findHighestPaidEmployee [
+	"find the highest paid employee"
+	|theLargestWage|
+	theLargestWage := (memory at: 1) weekWage.
+	
+	memory do: [ :employee |
+		employee weekWage > theLargestWage ifTrue: [ 
+			theLargestWage := employee weekWage. ] ].
+	
+	^memory select: [ :employee |
+		employee weekWage = theLargestWage ].
 ]
 
 { #category : #'as yet unclassified' }
