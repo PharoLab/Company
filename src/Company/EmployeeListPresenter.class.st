@@ -182,6 +182,11 @@ EmployeeListPresenter >> initializeWindow: aWindowPresenter [
 						  icon: (self iconNamed: #glamorousRestart);
 						  action: [ self updatePresenter];
 						  yourself);
+				add: (self newToolbarButton
+						  label: 'Save the company to a file';
+						  icon: (self iconNamed: #smallSave);
+						  action: [ self storeCompany];
+						  yourself);
 				 yourself)
 ]
 
@@ -208,6 +213,17 @@ EmployeeListPresenter >> showHightestPaidEmployee [
 		
 	self updateFilterPresenter: companyFilter.
 	
+]
+
+{ #category : #'as yet unclassified' }
+EmployeeListPresenter >> storeCompany [
+	| presenter pathString|
+	pathString := (UIManager default request: 'Input the address') asString.
+	
+	presenter := ManagerPresenter newApplication: self application.
+	(self company storeToFile: pathString).
+		
+	self updatePresenter
 ]
 
 { #category : #'as yet unclassified' }
